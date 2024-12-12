@@ -20,6 +20,10 @@ public class ContactService {
     }
 
     public void saveContact(Contact contact){
-        contactRepository.save(contact);
+        Optional<Contact> findbyEmail = contactRepository.findContactByEmail(contact.getEmail());
+        if (!findbyEmail.isPresent()) {
+            contactRepository.save(contact);
+        }
+
     }
 }

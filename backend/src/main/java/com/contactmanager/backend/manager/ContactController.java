@@ -7,6 +7,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api")
+@CrossOrigin
 public class ContactController {
     @Autowired // Gets the dependecies from the contract service class
     private final ContactService contactService;
