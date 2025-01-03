@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api")
+@RequestMapping(path = "/contactManager")
 @CrossOrigin
 public class ContactController {
     @Autowired // Gets the dependecies from the contract service class
@@ -17,13 +17,13 @@ public class ContactController {
     }
 
     // GET endpoint
-    @GetMapping("getContacts")
+    @GetMapping("/getContacts")
     public List<Contact> getContacts(){
         return contactService.getContacts();
     }
 
     // Post endpoint
-    @PostMapping("saveContact")
+    @PostMapping("/saveContact")
     public void postContact(@RequestBody Contact contact){
         contactService.saveContact(contact);
     }

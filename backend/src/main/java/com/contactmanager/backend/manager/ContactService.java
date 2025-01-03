@@ -9,21 +9,18 @@ import java.util.Optional;
 @Service
 public class ContactService {
     @Autowired
-    private final ContactRepository contactRepository;
+    private ContactRepository contactRepository;
 
-    public ContactService(ContactRepository contactRepository) {
-        this.contactRepository = contactRepository;
-    }
 
     public List<Contact> getContacts(){
         return contactRepository.findAll();
     }
+
 
     public void saveContact(Contact contact){
         Optional<Contact> findbyEmail = contactRepository.findContactByEmail(contact.getEmail());
         if (!findbyEmail.isPresent()) {
             contactRepository.save(contact);
         }
-
     }
 }

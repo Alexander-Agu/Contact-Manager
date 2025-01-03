@@ -1,17 +1,37 @@
 package com.contactmanager.backend.manager;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(
+        name = "manager",
+        uniqueConstraints = @UniqueConstraint(
+                name = "emailid_address",
+                columnNames = "email_address"
+        )
+)
 public class Contact {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_sequence")
+    @SequenceGenerator(name = "id_sequence", sequenceName = "id_sequence", allocationSize = 1)
     private Long id;
     private String name;
+
+    @Column(name = "email_address", nullable = false)
     private String email;
+    @Column(nullable = false)
     private Integer phone;
+
+    public Contact(){
+
+    }
+
+    public Contact(String email, Integer phone, String name) {
+        this.email = email;
+        this.phone = phone;
+        this.name = name;
+    }
+
 
     public Long getId() {
         return id;
