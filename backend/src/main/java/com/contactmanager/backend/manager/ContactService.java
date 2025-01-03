@@ -23,4 +23,13 @@ public class ContactService {
             contactRepository.save(contact);
         }
     }
+
+
+    public void deleteStudent(Long id){
+        boolean contactId = contactRepository.existsById(id);
+        if(!contactId){
+            throw  new IllegalStateException("Contact does not exist");
+        }
+        contactRepository.deleteById(id);
+    }
 }

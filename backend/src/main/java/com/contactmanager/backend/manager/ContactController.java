@@ -27,4 +27,10 @@ public class ContactController {
     public void postContact(@RequestBody Contact contact){
         contactService.saveContact(contact);
     }
+
+    // Delete endpoint
+    @DeleteMapping(path = "/{contactId}")
+    public  void deleteContact(@PathVariable("contactId") Long id){
+        contactService.deleteStudent(id);
+    }
 }

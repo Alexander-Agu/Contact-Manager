@@ -20,13 +20,13 @@ public class Contact {
     @Column(name = "email_address", nullable = false)
     private String email;
     @Column(nullable = false)
-    private Integer phone;
+    private String phone;
 
     public Contact(){
 
     }
 
-    public Contact(String email, Integer phone, String name) {
+    public Contact(String email, String phone, String name) {
         this.email = email;
         this.phone = phone;
         this.name = name;
@@ -55,10 +55,10 @@ public class Contact {
         this.email = email;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 }
