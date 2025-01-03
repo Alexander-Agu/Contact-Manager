@@ -9,7 +9,7 @@ const phone = document.getElementById("phone");
 // Displays the available contact information in the database
 const displayContacts = (data) => {
     return managerContainer.innerHTML += data.map(x => {
-        let {name, email, id, phone} = x;
+        let { name, email, id, phone } = x;
         return `
                     <div class="contactContainer">
                     <div class="info">
@@ -37,10 +37,9 @@ const getData = async () => {
     const data = await fetch(getLink);
 
     let tostring = await data.json();
-    displayContacts(tostring)
-    console.log(tostring)
+    displayContacts(tostring);
 }
-getData()
+getData();
 
 
 // Saves the information to the database
@@ -50,48 +49,43 @@ const saveData = async (input) => {
     await fetch(url, {
         method: "POST",
         headers: {
-        "Content-Type": "application/json", // Matches Postman
+            "Content-Type": "application/json", // Matches Postman
         },
         body: JSON.stringify(input)
     })
-    // .then(response => {
-    // if (!response.ok) {
-    //     throw new Error(`HTTP error! status: ${response.status}`);
-    // }
-    // return response.json();
-    // })
 }
 
 
 // Generates the form information
 const getInput = () => {
-    if (names.value && email.value && phone.value){
-        try{
-            console.log(names.value, email.value, phone.value)
+    if (names.value && email.value && phone.value) {
+        try {
             return {
                 "name": names.value,
                 "email": email.value,
                 "phone": phone.value
             }
-        } catch{
+        } catch {
             console.log("Please enter valid information")
         }
     }
-    
+
 }
 
 
 // Calls the saveData function to send data to the database when clicked
-saveInfo.addEventListener('click', ()=>{
-    console.log(getInput())
+saveInfo.addEventListener('click', () => {
     saveData(getInput())
+    location.reload()
 })
 
-async function deleteContact(id){
-    console.log(id)
+
+// Deletes the contact from the database
+async function deleteContact(id) {
     url = `http://localhost:8080/contactManager/${id}`;
-    await fetch(url,{
-            method: "DELETE"
-        }
+    await fetch(url, {
+        method: "DELETE"
+    }
     )
+    location.reload()
 }
